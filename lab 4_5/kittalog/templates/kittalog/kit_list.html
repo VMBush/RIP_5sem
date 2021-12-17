@@ -1,0 +1,35 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block header%}
+    <div class='header'  style="text-align: center; ">
+      <span class='mainer'><a href = '{% url 'shelter_list' %}'>На главную</a></span>
+      <h1>
+        <a href = "{% url 'kittalog' sh %}"><img class='logo' src='{{shelter.picture.url}}'>Приют "{{shelter}}"</a>
+      </h1> 
+    </div>
+{% endblock header %}
+
+{% block content %}
+<div style = 'margin: 0 10%'>
+    <h2>Куда я попал?</h2>
+    <p>Вы находитесь на сайте кошачьего питомника "{{shelter}}"<br>Вы сделаете очень доброе дело, если приютите у себя дома ушастого питомца</p>
+    <p><strong>На данный момент 
+        {% if kit_list %} количество усатых милашек, ожидающих своих новых хозяев в нашем питомнике: {{kit_list.count}}
+        {%else%} в нашем питомнике нет маленьких друзей, ожидающих своих новых хозяев
+        {% endif%}</strong></p>
+</div>
+{% if kit_list %}
+<div table style = 'margin-top: 5%'>
+    <table class='listed' style = 'margin: 5% 10%'>
+        <tr><th style='width: 10em'>Фото</th><th style='width: 15em'>Имя пушистика</th><th style='width: 15em'>Порода</th><th style='width: 20'></th></tr>
+        {% for kit in kit_list %}
+        <tr><td style='width: 20'><img src={{kit.picture.url}} style="max-width: 7em; max-height: 7em" ></td><td style='width: 20'>{{kit}}</td><td style='width: 20'>{{kit.type}}</td><td style='width: 20'><a href='{{kit.get_absolute_url}}'><button>Подробнее</button></a></tr>
+
+
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+{% endblock content %}  
+

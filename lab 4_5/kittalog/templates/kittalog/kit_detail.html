@@ -1,0 +1,17 @@
+{% extends 'kittalog/kit_list.html' %}
+
+{% block content %}
+<div class='detail-content'>
+    <h2> Привет! Меня зовут {{kit.name}}.</h2>
+    <div class='img-handler fit'>
+        <p><img src='{{kit.picture.url}}'></p>
+    </div>
+
+    <h3>Моя порода: {{kit.type}}</h3>
+    <div class='info'>
+        <h3>Обо мне:</h3>
+        <p>{{kit.description}}</p>
+    </div>
+
+</div>
+{% endblock content %}

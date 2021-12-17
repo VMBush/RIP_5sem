@@ -1,0 +1,28 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block header%}
+    <div class='header'  style="text-align: center; ">
+      <h1>
+        <a href = '{% url 'shelter_list' %}'><img class='logo' src='{% static 'kittalog/img/logo.jpg' %}'>Сеть приютов "Хвосты и лапки"</a>
+      </h1> 
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <h2>Добро пожаловать</h2>
+    <p>Ниже представлены приюты для животных, входящих в нашу сеть "Хвосты и лапки"</p>
+
+    {% if shelter_list %}
+    <div table style = 'margin-top: 5%'>
+        <table class='listed' style = 'margin: 5% 10%'>
+            <tr><th style='width: 10em'></th><th style='width: 15em'>Название</th><th style='width: 15em'>Город</th><th style='width: 20em'>Число животных</th><th></th></tr>
+            {% for shelter in shelter_list %}
+            <tr><td><img src={{shelter.picture.url}} style="max-width: 7em; max-height: 7em" ></td><td>{{shelter}}</td><td>{{shelter.city}}</td><th>{{shelter.get_kit_num}}</th><td><a href='{% url 'kittalog' shelter.id %}'><button>Подробнее</button></a></tr>
+
+
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+{% endblock content %}
