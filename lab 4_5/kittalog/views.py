@@ -1,5 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
+from rest_framework import viewsets
+from kittalog.serializers import KitSerializer
+from kittalog.models import Kit
 
 
 from .models import Kit, Shelter
@@ -32,3 +35,7 @@ class KitDetailView(generic.DetailView):
 
 class ShelterListView(generic.ListView):
     model = Shelter
+
+class KitViewSet(viewsets.ModelViewSet):
+    queryset = Kit.objects.all().order_by('date_modified')
+    serializer_class = KitSerializer
